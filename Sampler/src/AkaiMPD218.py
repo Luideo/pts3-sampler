@@ -65,19 +65,19 @@ class AkaiMPD218(MidiDevice):
                         program = self.getProgram(i - 143)
                         if padTouch <= 15:
                             if program.getBank('A').getPad(padTouch).isLoop == True and program.getBank('A').getPad(padTouch).isReading() == True:
-                                program.getBank('A').getPad(padTouch).stopLoop()
+                                program.getBank('A').getPad(padTouch).playQueue(velocite)
                             else:
                                 program.getBank('A').getPad(padTouch).play(velocite)
                                 print(program.getBank('A').getPad(padTouch).channel)
                         elif padTouch > 15 and padTouch <= 31:
                             if program.getBank('B').getPad(padTouch).isLoop == True and program.getBank('B').getPad(padTouch).isReading() == True:
-                                program.getBank('B').getPad(padTouch).stopLoop()
+                                program.getBank('B').getPad(padTouch).playQueue(velocite)
                             else:
                                 program.getBank('B').getPad(padTouch).play(velocite)
                                 print(program.getBank('B').getPad(padTouch).channel)
                         elif padTouch > 31 and padTouch <= 47:
                             if program.getBank('C').getPad(padTouch).isLoop == True and program.getBank('C').getPad(padTouch).isReading() == True:
-                                program.getBank('C').getPad(padTouch).stopLoop()
+                                program.getBank('C').getPad(padTouch).playQueue(velocite)
                             else:
                                 program.getBank('C').getPad(padTouch).play(velocite)
                                 print(program.getBank('C').getPad(padTouch).channel)
