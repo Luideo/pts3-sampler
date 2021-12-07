@@ -1,0 +1,9 @@
+### Fichier : requirements.txt
+### Installation des dépendances et modules
+### Dernière modification : 03/02/21
+
+# rtmidi-python
+rtmidi-python
+
+# pygame
+pygame
