@@ -60,12 +60,6 @@ class Pad:
         return self.sound
     # Ajoute un son dans une queue
     def playQueue(self, velocite):
-        mixer.music.load(self.sound.getPath())
-
-        volume = round(float(velocite * 100 / 127) / 100, 2)
-
-        mixer.Channel(self.channel).set_volume(volume)
-
         if self.isLoop == True:
             mixer.Channel(self.channel).queue(mixer.Sound(self.sound.getPath()), loops=-1)
         else:
