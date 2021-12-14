@@ -28,11 +28,11 @@ class Pad:
 
         if self.isLoop == True:
             if loop == True:
+                mixer.Channel(self.channel).play()
                 mixer.Channel(self.channel).queue(mixer.Sound(self.sound.getPath()))
-                print("ça le met en queue")
-                mixer.Channel(self.channel).play(-1)
+                print("ca le met en queue")
             else:
-                mixer.Channel(self.channel).play(mixer.Sound(self.sound.getPath()), loops=-1)
+                mixer.Channel(self.channel).play(mixer.Sound(self.sound.getPath()), loop = -1)
         else:
             mixer.Channel(self.channel).play(mixer.Sound(self.sound.getPath()))
 
