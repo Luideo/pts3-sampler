@@ -24,7 +24,8 @@ class Pad:
         volume = round(float(velocite*100/127)/100, 2)
         
         mixer.Channel(self.channel).set_volume(volume)
-        
+
+
         if self.isLoop == True:
             mixer.Channel(self.channel).play(mixer.Sound(self.sound.getPath()), loops=-1)
         else:

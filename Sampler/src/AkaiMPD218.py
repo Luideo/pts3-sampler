@@ -65,7 +65,8 @@ class AkaiMPD218(MidiDevice):
                         program = self.getProgram(i - 143)
                         if padTouch <= 15:
                             if program.getBank('A').getPad(padTouch).isLoop == True and program.getBank('A').getPad(padTouch).isReading() == True:
-                                program.getBank('A').getPad(padTouch).playQueue(velocite)
+                                print("Le pad : {} est lancé alors qu'il y'a un son",padTouch)
+                                # program.getBank('A').getPad(padTouch).playQueue(velocite)
                             else:
                                 program.getBank('A').getPad(padTouch).play(velocite)
                                 print(program.getBank('A').getPad(padTouch).channel)
