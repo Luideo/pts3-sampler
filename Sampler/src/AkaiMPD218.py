@@ -65,26 +65,17 @@ class AkaiMPD218(MidiDevice):
                         program = self.getProgram(i - 143)
                         if padTouch <= 15:
                             if program.getBank('A').getPad(padTouch).isLoop == True and program.getBank('A').getPad(padTouch).isReading() == True:
-                                print("Le pad : {} est lancé alors qu'il y'a un son",padTouch)
-                                # program.getBank('A').getPad(padTouch).playQueue(velocite)
+                                program.getBank('A').getPad(padTouch).play(velocite, True)
                             else:
-                                program.getBank('A').getPad(padTouch).play(velocite)
-                                print("Le pad : {} est lancé alors qu'il y'a pas de son",padTouch)
+                                program.getBank('A').getPad(padTouch).play(velocite,False)
                                 print(program.getBank('A').getPad(padTouch).channel)
                         elif padTouch > 15 and padTouch <= 31:
                             if program.getBank('B').getPad(padTouch).isLoop == True and program.getBank('B').getPad(padTouch).isReading() == True:
-                                print("Le pad : {} est lancé alors qu'il y'a un son", padTouch)
-                                #program.getBank('B').getPad(padTouch).playQueue(velocite)
+                                program.getBank('A').getPad(padTouch).play(velocite, True)
                             else:
-                                print("Le pad : {} est lancé alors qu'il y'a pas de son", padTouch)
-                                program.getBank('B').getPad(padTouch).play(velocite)
+                                program.getBank('B').getPad(padTouch).play(velocite, False)
                                 print(program.getBank('B').getPad(padTouch).channel)
                         elif padTouch > 31 and padTouch <= 47:
-                            if program.getBank('C').getPad(padTouch).isLoop == True and program.getBank('C').getPad(padTouch).isReading() == True:
-                                print("Le pad : {} est lancé alors qu'il y'a un son", padTouch)
-                                #program.getBank('C').getPad(padTouch).playQueue(velocite)
-                            else:
-                                print("Le pad : {} est lancé alors qu'il y'a pas de son", padTouch)
                                 program.getBank('C').getPad(padTouch).play(velocite)
                                 print(program.getBank('C').getPad(padTouch).channel)
 

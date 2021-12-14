@@ -18,7 +18,7 @@ class Pad:
         self.channel = channel
 
     # Jouer un son associe au pad
-    def play(self, velocite):
+    def play(self, velocite, loop):
         mixer.music.load(self.sound.getPath())
         
         volume = round(float(velocite*100/127)/100, 2)
@@ -27,7 +27,12 @@ class Pad:
 
 
         if self.isLoop == True:
-            mixer.Channel(self.channel).play(mixer.Sound(self.sound.getPath()), loops=-1)
+            if loop == True:
+                mixer.Channel(self.channel).queue(mixer.Sound(self.sound.getPath()))
+                print("ça le met en queue")
+                mixer.Channel(self.channel).play(-1)
+            else:
+                mixer.Channel(self.channel).play(mixer.Sound(self.sound.getPath()), loops=-1)
         else:
             mixer.Channel(self.channel).play(mixer.Sound(self.sound.getPath()))
 
@@ -60,11 +65,6 @@ class Pad:
     def getSound(self):
         return self.sound
     # Ajoute un son dans une queue
-    def playQueue(self, velocite):
-        if self.isLoop == True:
-            mixer.Channel(self.channel).queue(mixer.Sound(self.sound.getPath()), loops=-1)
-        else:
-            mixer.Channel(self.channel).queue(mixer.Sound(self.sound.getPath()))
 
 
 
