@@ -54,7 +54,8 @@ class AkaiMPD218(MidiDevice):
         Loop = False
         while True:
             if Loop == True:
-                    programLoop.getBank(Bankloop).getPad(padTouchLoop).play(velociteLoop)
+                    if programLoop.getBank(Bankloop).getPad(padTouchLoop).isReading == False:
+                        programLoop.getBank(Bankloop).getPad(padTouchLoop).play(velociteLoop)
             message, delta_time = self.midi_in.get_message()
             if message:
                 canal = message[0]
@@ -67,25 +68,34 @@ class AkaiMPD218(MidiDevice):
                         program = self.getProgram(i - 143)
                         if padTouch <= 15:
                             if program.getBank('A').getPad(padTouch).isLoop == True and program.getBank('A').getPad(padTouch).isReading() == True:
-                                program.getBank('A').getPad(padTouch).play(velocite)
                                 Bankloop = 'A'
                                 padTouchLoop = padTouch
                                 velociteLoop = velocite
                                 programLoop = program
                             else:
                                 program.getBank('A').getPad(padTouch).play(velocite)
-                                Loop = True
-                                Bankloop = 'A'
-                                padTouchLoop = padTouch
-                                velociteLoop = velocite
-                                programLoop = program
+                                if program.getBank('A').getPad(padTouch).isLoop == True:
+                                    Loop = True
+                                    Bankloop = 'A'
+                                    padTouchLoop = padTouch
+                                    velociteLoop = velocite
+                                    programLoop = program
 
                                 print(program.getBank('A').getPad(padTouch).channel)
                         elif padTouch > 15 and padTouch <= 31:
                             if program.getBank('B').getPad(padTouch).isLoop == True and program.getBank('B').getPad(padTouch).isReading() == True:
-                                program.getBank('A').getPad(padTouch).play(velocite)
+                                Bankloop = 'B'
+                                padTouchLoop = padTouch
+                                velociteLoop = velocite
+                                programLoop = program
                             else:
                                 program.getBank('B').getPad(padTouch).play(velocite)
+                                if program.getBank('B').getPad(padTouch).isLoop == True:
+                                    Loop = True
+                                    Bankloop = 'B'
+                                    padTouchLoop = padTouch
+                                    velociteLoop = velocite
+                                    programLoop = program
                                 print(program.getBank('B').getPad(padTouch).channel)
                         elif padTouch > 31 and padTouch <= 47:
                                 program.getBank('C').getPad(padTouch).play(velocite)
