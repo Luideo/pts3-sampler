@@ -49,11 +49,13 @@ class AkaiMPD218(MidiDevice):
 
 
     # Mettre en route l'appareil AKAI MPD218 : messages MIDI, MIDI Channel, velocite, sons, boucles
+    # noinspection PyUnreachableCode
     def start(self):
-
+        Loop = False
         while True:
+            if Loop == True:
+                    programLoop.getBank(Bankloop).getPad(padTouchLoop).play(velociteLoop)
             message, delta_time = self.midi_in.get_message()
-
             if message:
                 canal = message[0]
                 padTouch = message[1]
@@ -65,15 +67,25 @@ class AkaiMPD218(MidiDevice):
                         program = self.getProgram(i - 143)
                         if padTouch <= 15:
                             if program.getBank('A').getPad(padTouch).isLoop == True and program.getBank('A').getPad(padTouch).isReading() == True:
-                                program.getBank('A').getPad(padTouch).play(velocite, True)
+                                program.getBank('A').getPad(padTouch).play(velocite)
+                                Bankloop = 'A'
+                                padTouchLoop = padTouch
+                                velociteLoop = velocite
+                                programLoop = program
                             else:
-                                program.getBank('A').getPad(padTouch).play(velocite,False)
+                                program.getBank('A').getPad(padTouch).play(velocite)
+                                Loop = True
+                                Bankloop = 'A'
+                                padTouchLoop = padTouch
+                                velociteLoop = velocite
+                                programLoop = program
+
                                 print(program.getBank('A').getPad(padTouch).channel)
                         elif padTouch > 15 and padTouch <= 31:
                             if program.getBank('B').getPad(padTouch).isLoop == True and program.getBank('B').getPad(padTouch).isReading() == True:
-                                program.getBank('A').getPad(padTouch).play(velocite, True)
+                                program.getBank('A').getPad(padTouch).play(velocite)
                             else:
-                                program.getBank('B').getPad(padTouch).play(velocite, False)
+                                program.getBank('B').getPad(padTouch).play(velocite)
                                 print(program.getBank('B').getPad(padTouch).channel)
                         elif padTouch > 31 and padTouch <= 47:
                                 program.getBank('C').getPad(padTouch).play(velocite)
