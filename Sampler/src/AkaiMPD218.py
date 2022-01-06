@@ -76,6 +76,10 @@ class AkaiMPD218(MidiDevice):
                         program = self.getProgram(i - 143)
                         if padTouch <= 15:
                             if program.getBank('A').getPad(padTouch).isLoop == True and program.getBank('A').getPad(padTouch).isReading() == True:
+                                if(len(Bankloop) > 2):
+                                    Bankloop.pop(1)
+                                    padTouchLoop.pop(1)
+                                    velociteLoop.pop(1)
                                 Bankloop.append('A')
                                 padTouchLoop.append(padTouch)
                                 velociteLoop.append(velocite)

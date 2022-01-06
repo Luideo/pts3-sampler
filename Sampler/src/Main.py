@@ -3,7 +3,6 @@
 
 from AkaiMPD218 import AkaiMPD218
 
-
 def main():
 
     akai = AkaiMPD218(model="MPD218")
