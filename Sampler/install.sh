@@ -60,9 +60,21 @@ echo "Automatiser le la connexion de l'appareil MIDI "
 echo "Automatiser le lancement du programme "
 echo "---------------------------------------------"
 
-sudo su
-echo "@lxterminal --command=\"\`home/pi/Desktop/2020-2021-INFO2-PTS3-Sampler/conf/startQJackCtl.sh\`\"" >> /etc/xdg/lxsession/LXDE-pi/autostart
+echo $'#Demarrage de la redirection de canaux du pilote audio + demarrage script Python sampleur\ncd /home/pi/Desktop/2020-2021-INFO2-PTS3-Sampler/conf\n/home/pi/Desktop/2020-2021-INFO2-PTS3-Sampler/conf/startQJackCtl.sh' >> /home/pi/.bashrc
+
+# ------ Modification du mode HDMI dans le fichier de configuration de démarrage ------#
+echo "---------------------------------------------"
+echo "Modification du mode HDMI au démarrage de Raspbian "
+echo "---------------------------------------------"
+
+echo $'#Passage en mode composite du HDMI au demarrage de Raspbian pour garder les memes id de peripheriques audio - AKAI MPD218\nhdmi_ignore_hotplug=1' >> /boot/config.txt
 
 echo "---------------------------------------------"
 echo "Installation terminée "
+echo "Redémarrage nécessaire. Le systeme devrait redémarrer dans 5 secondes. "
+echo "Si le système ne redémarre pas, redémarrez-le manuellement. "
 echo "---------------------------------------------"
+
+# ------ Redémarrage final ------#
+sleep(5);
+reboot;
