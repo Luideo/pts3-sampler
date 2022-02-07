@@ -8,6 +8,7 @@ from Sound import Sound
 from Pad import Pad
 from Program import Program
 from Bank import Bank
+import time
 
 # Classe representant un appreil MIDI de marque Akai
 # Classe derivee de MidiDevice
@@ -58,6 +59,7 @@ class AkaiMPD218(MidiDevice):
         velociteLoop = []
         while True:
             if Loop == True:
+                   print(starttime - time.time())
                    if programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).isReading() == False:
                             if(len(Bankloop) > 1):
                                 Bankloop.pop(0)
@@ -65,6 +67,8 @@ class AkaiMPD218(MidiDevice):
                                 velociteLoop.pop(0)
                                 print(padTouchLoop[0])
                             programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).play(velociteLoop[0])
+                   if starttime - time.time() == 0.05:
+                       programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).play(velociteLoop[0])
             message, delta_time = self.midi_in.get_message()
             if message:
                 canal = message[0]
@@ -101,6 +105,7 @@ class AkaiMPD218(MidiDevice):
                             else:
                                 
                                 if program.getBank('A').getPad(padTouch).isLoop == True:
+                                    starttime = time.time()
                                     Loop = True
                                     Bankloop.append('A')
                                     padTouchLoop.append(padTouch)
