@@ -14,7 +14,27 @@ import time
 # Classe derivee de MidiDevice
 class AkaiMPD218(MidiDevice):
     
-    
+    def CleanListLoop(self, Bankloop, padTouchLoop, velociteLoop):
+        Bankloop.pop(0)
+        padTouchLoop.pop(0)
+        velociteLoop.pop(0)
+        if (len(Bankloop) > 1):
+            Bankloop.pop(1)
+            padTouchLoop.pop(1)
+            velociteLoop.pop(1)
+        else:
+            if (len(Bankloop) > 1):
+                Bankloop.pop(1)
+                padTouchLoop.pop(1)
+                velociteLoop.pop(1)
+
+    def AddLoop(self,BankLoop,padTouchLoop, velociteLoop, programLoop, Bank, padTouch, velocite, program):
+        BankLoop.append(Bank)
+        padTouchLoop.append(padTouch)
+        velociteLoop.append(velocite)
+        programLoop = program
+
+
     # Peupler l'appareil AKAI de ses programmes, banques, pads et sons.
     def populate(self):
         if(self.model == "MPD218"):
@@ -57,6 +77,7 @@ class AkaiMPD218(MidiDevice):
         Bankloop = []
         padTouchLoop = []
         velociteLoop = []
+        programLoop = 0
         while True:
             if Loop == True:
                    print(starttime - time.time())
@@ -65,7 +86,6 @@ class AkaiMPD218(MidiDevice):
                                 Bankloop.pop(0)
                                 padTouchLoop.pop(0)
                                 velociteLoop.pop(0)
-                                print(padTouchLoop[0])
                             programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).play(velociteLoop[0])
                    if starttime - time.time() == 0.05:
                        programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).play(velociteLoop[0])
@@ -83,75 +103,32 @@ class AkaiMPD218(MidiDevice):
                             if program.getBank('A').getPad(padTouch).isLoop == True and program.getBank('A').getPad(padTouch).isReading() == True:
                                 if(len(Bankloop) != 0):
                                     if(Bankloop[0] == 'A' and padTouch == padTouchLoop[0]):
-                                        print("Stop")
                                         Loop = False
                                         program.getBank('A').getPad(padTouch).stopLoop()
-                                        Bankloop.pop(0)
-                                        padTouchLoop.pop(0)
-                                        velociteLoop.pop(0)
-                                        if(len(Bankloop) > 1):
-                                            Bankloop.pop(1)
-                                            padTouchLoop.pop(1)
-                                            velociteLoop.pop(1)
-                                    else:
-                                        if(len(Bankloop) > 1):
-                                            Bankloop.pop(1)
-                                            padTouchLoop.pop(1)
-                                            velociteLoop.pop(1)
-                                        Bankloop.append('A')
-                                        padTouchLoop.append(padTouch)
-                                        velociteLoop.append(velocite)
-                                        programLoop = program
+                                        self.CleanListLoop(Bankloop,padTouchLoop,velociteLoop)
+                                        self.AddLoop(Bankloop, padTouchLoop, velociteLoop, programLoop, 'A', padTouch, velocite, program)
                             else:
-                                
                                 if program.getBank('A').getPad(padTouch).isLoop == True:
                                     starttime = time.time()
                                     Loop = True
-                                    Bankloop.append('A')
-                                    padTouchLoop.append(padTouch)
-                                    velociteLoop.append(velocite)
-                                    programLoop = program
+                                    self.AddLoop(Bankloop, padTouchLoop, velociteLoop, programLoop, 'A', padTouch, velocite, program)
                                 else:
                                     program.getBank('A').getPad(padTouch).play(velocite)
-                                    
-
-                                print(program.getBank('A').getPad(padTouch).channel)
+                                    #print(program.getBank('A').getPad(padTouch).channel)
                         elif padTouch > 15 and padTouch <= 31:
                             if program.getBank('B').getPad(padTouch).isLoop == True and program.getBank('B').getPad(padTouch).isReading() == True:
                                 if(len(Bankloop) != 0):
                                     if(Bankloop[0] == 'B' and padTouch == padTouchLoop[0]):
-                                        print("Stop")
                                         Loop = False
                                         program.getBank('B').getPad(padTouch).stopLoop()
-                                        Bankloop.pop(0)
-                                        padTouchLoop.pop(0)
-                                        velociteLoop.pop(0)
-                                        if(len(Bankloop) > 1):
-                                            Bankloop.pop(1)
-                                            padTouchLoop.pop(1)
-                                            velociteLoop.pop(1)
-                                    else:
-                                        if(len(Bankloop) > 1):
-                                            Bankloop.pop(1)
-                                            padTouchLoop.pop(1)
-                                            velociteLoop.pop(1)
-                                        Bankloop.append('B')
-                                        padTouchLoop.append(padTouch)
-                                        velociteLoop.append(velocite)
-                                        programLoop = program
+                                        self.CleanListLoop(Bankloop, padTouchLoop, velociteLoop)
+                                        self.AddLoop(Bankloop, padTouchLoop, velociteLoop, programLoop, 'B', padTouch, velocite, program)
                             else:
                                 program.getBank('B').getPad(padTouch).play(velocite)
                                 if program.getBank('B').getPad(padTouch).isLoop == True:
                                     Loop = True
-                                    Bankloop.append('B')
-                                    padTouchLoop.append(padTouch)
-                                    velociteLoop.append(velocite)
-                                    programLoop = program
-                                print(program.getBank('B').getPad(padTouch).channel)
+                                    self.AddLoop(Bankloop, padTouchLoop, velociteLoop, programLoop, 'A', padTouch, velocite, program)
+                                #print(program.getBank('B').getPad(padTouch).channel)
                         elif padTouch > 31 and padTouch <= 47:
                                 program.getBank('C').getPad(padTouch).play(velocite)
-                                print(program.getBank('C').getPad(padTouch).channel)
-
-
-
-
+                                #print(program.getBank('C').getPad(padTouch).channel)
