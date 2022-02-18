@@ -74,21 +74,20 @@ class AkaiMPD218(MidiDevice):
     # noinspection PyUnreachableCode
     def start(self):
         Loop = False
+        reverb = False
+        velociteReverb = 0
         Bankloop = []
         padTouchLoop = []
         velociteLoop = []
         programLoop = 0
         while True:
             if Loop == True:
-                   print(starttime - time.time())
                    if programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).isReading() == False:
                             if(len(Bankloop) > 1):
                                 Bankloop.pop(0)
                                 padTouchLoop.pop(0)
                                 velociteLoop.pop(0)
-                            programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).play(velociteLoop[0])
-                   if starttime - time.time() == 0.05:
-                       programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).play(velociteLoop[0])
+                            programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).play(velociteLoop[0], reverb, velociteReverb)
             message, delta_time = self.midi_in.get_message()
             if message:
                 canal = message[0]
@@ -113,7 +112,7 @@ class AkaiMPD218(MidiDevice):
                                     Loop = True
                                     self.AddLoop(Bankloop, padTouchLoop, velociteLoop, programLoop, 'A', padTouch, velocite, program)
                                 else:
-                                    program.getBank('A').getPad(padTouch).play(velocite)
+                                    program.getBank('A').getPad(padTouch).play(velocite, reverb, velociteReverb)
                                     #print(program.getBank('A').getPad(padTouch).channel)
                         elif padTouch > 15 and padTouch <= 31:
                             if program.getBank('B').getPad(padTouch).isLoop == True and program.getBank('B').getPad(padTouch).isReading() == True:
@@ -124,11 +123,18 @@ class AkaiMPD218(MidiDevice):
                                         self.CleanListLoop(Bankloop, padTouchLoop, velociteLoop)
                                         self.AddLoop(Bankloop, padTouchLoop, velociteLoop, programLoop, 'B', padTouch, velocite, program)
                             else:
-                                program.getBank('B').getPad(padTouch).play(velocite)
+                                program.getBank('B').getPad(padTouch).play(velocite, reverb, velociteReverb)
                                 if program.getBank('B').getPad(padTouch).isLoop == True:
                                     Loop = True
                                     self.AddLoop(Bankloop, padTouchLoop, velociteLoop, programLoop, 'A', padTouch, velocite, program)
                                 #print(program.getBank('B').getPad(padTouch).channel)
                         elif padTouch > 31 and padTouch <= 47:
-                                program.getBank('C').getPad(padTouch).play(velocite)
+                                program.getBank('C').getPad(padTouch).play(velocite, reverb, velociteReverb)
                                 #print(program.getBank('C').getPad(padTouch).channel)
+                        elif padTouch == 51:
+                            if(velocite == 0):
+                                reverb = False
+                            else:
+                                reverb = True
+                                velociteReverb = velocite
+
