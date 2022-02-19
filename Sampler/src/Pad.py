@@ -39,18 +39,25 @@ class Pad:
     # Jouer un son associe au pad
     def play(self, velocite, reverb, velociteReverb):
 
-        Path = self.sound.getPath()
-
         if reverb == True:
             Path = self.makeReverb(velociteReverb)
 
-        mixer.music.load(Path)
-        
-        volume = round(float(velocite*100/127)/100, 2)
-        
-        mixer.Channel(self.channel).set_volume(volume)
+            mixer.music.load(Path)
 
-        mixer.Channel(self.channel).play(Path)
+            volume = round(float(velocite * 100 / 127) / 100, 2)
+
+            mixer.Channel(self.channel).set_volume(volume)
+
+            mixer.Channel(self.channel).play(mixer.music(Path))
+
+        else:
+            mixer.music.load(self.sound.getPath())
+        
+            volume = round(float(velocite*100/127)/100, 2)
+        
+            mixer.Channel(self.channel).set_volume(volume)
+
+            mixer.Channel(self.channel).play(mixer.music(self.sound.getPath()))
 
     # Arreter un son se jouant en boucle
     def stopLoop(self):
