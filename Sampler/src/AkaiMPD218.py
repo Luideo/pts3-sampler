@@ -103,15 +103,26 @@ class AkaiMPD218(MidiDevice):
                                     if(Bankloop[0] == 'A' and padTouch == padTouchLoop[0]):
                                         Loop = False
                                         program.getBank('A').getPad(padTouch).stopLoop()
-                                        self.CleanListLoop(Bankloop,padTouchLoop,velociteLoop)
-                                        Bankloop.append(Bank)
+                                        Bankloop.pop(0)
+                                        padTouchLoop.pop(0)
+                                        velociteLoop.pop(0)
+                                        if (len(Bankloop) > 1):
+                                            Bankloop.pop(1)
+                                            padTouchLoop.pop(1)
+                                            velociteLoop.pop(1)
+                                        else:
+                                            if (len(Bankloop) > 1):
+                                                Bankloop.pop(1)
+                                                padTouchLoop.pop(1)
+                                                velociteLoop.pop(1)
+                                        Bankloop.append('A')
                                         padTouchLoop.append(padTouch)
                                         velociteLoop.append(velocite)
                                         programLoop = program
                             else:
                                 if program.getBank('A').getPad(padTouch).isLoop == True:
                                     Loop = True
-                                    Bankloop.append(Bank)
+                                    Bankloop.append('A')
                                     padTouchLoop.append(padTouch)
                                     velociteLoop.append(velocite)
                                     programLoop = program
@@ -124,8 +135,19 @@ class AkaiMPD218(MidiDevice):
                                     if(Bankloop[0] == 'B' and padTouch == padTouchLoop[0]):
                                         Loop = False
                                         program.getBank('B').getPad(padTouch).stopLoop()
-                                        self.CleanListLoop(Bankloop, padTouchLoop, velociteLoop)
-                                        Bankloop.append(Bank)
+                                        Bankloop.pop(0)
+                                        padTouchLoop.pop(0)
+                                        velociteLoop.pop(0)
+                                        if (len(Bankloop) > 1):
+                                            Bankloop.pop(1)
+                                            padTouchLoop.pop(1)
+                                            velociteLoop.pop(1)
+                                        else:
+                                            if (len(Bankloop) > 1):
+                                                Bankloop.pop(1)
+                                                padTouchLoop.pop(1)
+                                                velociteLoop.pop(1)
+                                        Bankloop.append('B')
                                         padTouchLoop.append(padTouch)
                                         velociteLoop.append(velocite)
                                         programLoop = program
@@ -133,7 +155,7 @@ class AkaiMPD218(MidiDevice):
                                 program.getBank('B').getPad(padTouch).play(velocite, reverb, velociteReverb)
                                 if program.getBank('B').getPad(padTouch).isLoop == True:
                                     Loop = True
-                                    Bankloop.append(Bank)
+                                    Bankloop.append('B')
                                     padTouchLoop.append(padTouch)
                                     velociteLoop.append(velocite)
                                     programLoop = program
