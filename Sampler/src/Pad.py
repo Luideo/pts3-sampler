@@ -39,6 +39,7 @@ class Pad:
     # Jouer un son associe au pad
     def play(self, velocite, reverb, velociteReverb):
 
+        print(reverb)
         if reverb == True:
             Path = self.makeReverb(velociteReverb)
 
