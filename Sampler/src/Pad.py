@@ -5,7 +5,7 @@
 import pygame
 from pygame import mixer
 import soundfile as sf
-from pedalboard import Pedalboard, Chorus, Reverb, Delay
+from pysndfx import AudioEffectsChain
 class Pad:
 
     # number : numero du pad
@@ -21,17 +21,18 @@ class Pad:
     def makeReverb(self, velocite):
 
         DelayReverb = velocite / 127
-        audio, sample_rate = sf.read(self.sound.getPath())
 
-        # Make a Pedalboard object, containing multiple plugins:
-        board = Pedalboard([Chorus(), Reverb(room_size=DelayReverb)])
+        fx = (
+            AudioEffectsChain()
+            .reverb()
+        )
 
-        # Run the audio through this pedalboard!
-        effected = board(audio, sample_rate)
+        infile = self.sound.getPath()
+        NewPath = './processed-output.ogg'
 
-        NewPath = './processed-output.wav'
+        fx(infile, NewPath)
+
         # Write the audio back as a wav file:
-        sf.write(NewPath, effected, sample_rate)
 
         return NewPath
 
