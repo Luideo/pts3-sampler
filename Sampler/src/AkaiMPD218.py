@@ -8,7 +8,6 @@ from Sound import Sound
 from Pad import Pad
 from Program import Program
 from Bank import Bank
-import time
 
 # Classe representant un appreil MIDI de marque Akai
 # Classe derivee de MidiDevice
