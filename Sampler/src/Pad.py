@@ -48,7 +48,7 @@ class Pad:
 
             mixer.Channel(self.channel).set_volume(volume)
 
-            mixer.Channel(self.channel).play(mixer.music(Path))
+            mixer.Channel(self.channel).play(mixer.Sound(Path))
 
         else:
             mixer.music.load(self.sound.getPath())
@@ -57,7 +57,7 @@ class Pad:
         
             mixer.Channel(self.channel).set_volume(volume)
 
-            mixer.Channel(self.channel).play(self.sound.getPath())
+            mixer.Channel(self.channel).play(mixer.Sound(self.sound.getPath()))
 
     # Arreter un son se jouant en boucle
     def stopLoop(self):
