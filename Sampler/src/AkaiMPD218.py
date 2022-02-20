@@ -94,7 +94,7 @@ class AkaiMPD218(MidiDevice):
                 velocite = message[2]
                 print("canal {} - pad {} - velocite {}".format(canal, padTouch, velocite))
                 # 128 a 144 respectivement 1 a 16 MIDI Channel
-                for i in range(144, 160):
+                for i in range(144, 178):
                     if canal == i:
                         program = self.getProgram(i - 143)
                         if padTouch <= 15:
@@ -164,6 +164,8 @@ class AkaiMPD218(MidiDevice):
                                 program.getBank('C').getPad(padTouch).play(velocite, reverb, velociteReverb)
                                 #print(program.getBank('C').getPad(padTouch).channel)
                         elif padTouch > 48:
+                            if(velocite == 0):
+                                reverb = False
                             reverb = True
                             velociteReverb = velocite
 

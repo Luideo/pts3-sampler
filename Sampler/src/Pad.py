@@ -24,7 +24,7 @@ class Pad:
 
         fx = (
             AudioEffectsChain()
-            .reverb()
+            .reverb(pre_delay=0)
         )
 
         infile = self.sound.getPath()
@@ -39,7 +39,6 @@ class Pad:
     # Jouer un son associe au pad
     def play(self, velocite, reverb, velociteReverb):
 
-        print(reverb)
         if reverb == True:
             Path = self.makeReverb(velociteReverb)
 
