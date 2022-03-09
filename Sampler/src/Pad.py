@@ -24,7 +24,7 @@ class Pad:
 
         fx = (
             AudioEffectsChain()
-            .reverb(pre_delay=0)
+            .reverb(pre_delay=500)
         )
 
         infile = self.sound.getPath()
