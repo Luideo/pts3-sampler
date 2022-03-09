@@ -110,15 +110,15 @@ class AkaiMPD218(MidiDevice):
                                             Bankloop.pop(1)
                                             padTouchLoop.pop(1)
                                             velociteLoop.pop(1)
-                                        else:
-                                            if (len(Bankloop) > 1):
-                                                Bankloop.pop(1)
-                                                padTouchLoop.pop(1)
-                                                velociteLoop.pop(1)
-                                        Bankloop.append('A')
-                                        padTouchLoop.append(padTouch)
-                                        velociteLoop.append(velocite)
-                                        programLoop = program
+                                    else:
+                                        if (len(Bankloop) > 1):
+                                            Bankloop.pop(1)
+                                            padTouchLoop.pop(1)
+                                            velociteLoop.pop(1)
+                                    Bankloop.append('A')
+                                    padTouchLoop.append(padTouch)
+                                    velociteLoop.append(velocite)
+                                    programLoop = program
                             else:
                                 if program.getBank('A').getPad(padTouch).isLoop == True:
                                     Loop = True
@@ -142,15 +142,15 @@ class AkaiMPD218(MidiDevice):
                                             Bankloop.pop(1)
                                             padTouchLoop.pop(1)
                                             velociteLoop.pop(1)
-                                        else:
-                                            if (len(Bankloop) > 1):
-                                                Bankloop.pop(1)
-                                                padTouchLoop.pop(1)
-                                                velociteLoop.pop(1)
-                                        Bankloop.append('B')
-                                        padTouchLoop.append(padTouch)
-                                        velociteLoop.append(velocite)
-                                        programLoop = program
+                                    else:
+                                        if (len(Bankloop) > 1):
+                                            Bankloop.pop(1)
+                                            padTouchLoop.pop(1)
+                                            velociteLoop.pop(1)
+                                    Bankloop.append('B')
+                                    padTouchLoop.append(padTouch)
+                                    velociteLoop.append(velocite)
+                                    programLoop = program
                             else:
                                 program.getBank('B').getPad(padTouch).play(velocite, reverb, velociteReverb)
                                 if program.getBank('B').getPad(padTouch).isLoop == True:
@@ -166,6 +166,7 @@ class AkaiMPD218(MidiDevice):
                         elif padTouch > 48:
                             if(velocite == 0):
                                 reverb = False
-                            reverb = True
-                            velociteReverb = velocite
+                            else:
+                                reverb = True
+                                velociteReverb = velocite
 
