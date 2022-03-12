@@ -6,6 +6,8 @@
 #           Mise à jour : 06/04/2021
 ###############################################
 
+samplerLocation=$(pwd)
+
 echo "-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/"
 echo "     Préparation de l'environnement     "
 echo "-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/"
@@ -60,7 +62,7 @@ echo "Automatiser le la connexion de l'appareil MIDI "
 echo "Automatiser le lancement du programme "
 echo "---------------------------------------------"
 
-echo $'#Demarrage de la redirection de canaux du pilote audio + demarrage script Python sampleur\ncd /home/pi/Desktop/2020-2021-INFO2-PTS3-Sampler/conf\n/home/pi/Desktop/2020-2021-INFO2-PTS3-Sampler/conf/startQJackCtl.sh' >> /home/pi/.bashrc
+echo $'#Demarrage de la redirection de canaux du pilote audio + demarrage script Python sampleur\ncd' $samplerLocation$'/conf\n'$samplerLocation$'/conf/startQJackCtl.sh' >> /home/pi/.bashrc
 
 # ------ Modification du mode HDMI dans le fichier de configuration de démarrage ------#
 echo "---------------------------------------------"
@@ -76,5 +78,5 @@ echo "Si le système ne redémarre pas, redémarrez-le manuellement. "
 echo "---------------------------------------------"
 
 # ------ Redémarrage final ------#
-sleep(5);
+sleep 5;
 reboot;
