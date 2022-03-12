@@ -62,6 +62,7 @@ echo "Automatiser le la connexion de l'appareil MIDI "
 echo "Automatiser le lancement du programme "
 echo "---------------------------------------------"
 
+chmod +x $samplerLocation$'/conf/startQJackCtl.sh'
 echo $'\n#Demarrage de la redirection de canaux du pilote audio + demarrage script Python sampleur\ncd' $samplerLocation$'/conf\n'$samplerLocation$'/conf/startQJackCtl.sh' >> /home/pi/.bashrc
 
 # ------ Modification du mode HDMI dans le fichier de configuration de démarrage ------#
