@@ -62,14 +62,14 @@ echo "Automatiser le la connexion de l'appareil MIDI "
 echo "Automatiser le lancement du programme "
 echo "---------------------------------------------"
 
-echo $'#Demarrage de la redirection de canaux du pilote audio + demarrage script Python sampleur\ncd' $samplerLocation$'/conf\n'$samplerLocation$'/conf/startQJackCtl.sh' >> /home/pi/.bashrc
+echo $'\n#Demarrage de la redirection de canaux du pilote audio + demarrage script Python sampleur\ncd' $samplerLocation$'/conf\n'$samplerLocation$'/conf/startQJackCtl.sh' >> /home/pi/.bashrc
 
 # ------ Modification du mode HDMI dans le fichier de configuration de démarrage ------#
 echo "---------------------------------------------"
 echo "Modification du mode HDMI au démarrage de Raspbian "
 echo "---------------------------------------------"
 
-echo $'#Passage en mode composite du HDMI au demarrage de Raspbian pour garder les memes id de peripheriques audio - AKAI MPD218\nhdmi_ignore_hotplug=1' >> /boot/config.txt
+echo $'\n#Passage en mode composite du HDMI au demarrage de Raspbian pour garder les memes id de peripheriques audio - AKAI MPD218\nhdmi_ignore_hotplug=1' >> /boot/config.txt
 
 echo "---------------------------------------------"
 echo "Installation terminée "
