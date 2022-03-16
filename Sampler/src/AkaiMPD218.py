@@ -150,11 +150,11 @@ class AkaiMPD218(MidiDevice):
                         elif padTouch > 31 and padTouch <= 47:
                                 program.getBank('C').getPad(padTouch).play(velocite, False, velociteReverb)
                                 #print(program.getBank('C').getPad(padTouch).channel)
-                        elif padTouch > 48:
+                        elif padTouch == :
                             if(velocite == 0):
                                 reverb = False
                             else:
-                                if(velocite % 40 == 0):
+                                if(velocite % 40 == 0 and Loop == True):
                                         reverb = True
                                         velociteReverb = programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).makeReverb(velocite)
 
