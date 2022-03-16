@@ -4,7 +4,6 @@
 # Import et chargement des modules requis
 import pygame
 from pygame import mixer
-import soundfile as sf
 from pysndfx import AudioEffectsChain
 class Pad:
 
@@ -38,7 +37,7 @@ class Pad:
 
     # Jouer un son associe au pad
     def play(self, velocite, reverb, velociteReverb):
-
+        print(reverb)
         if reverb == True:
             Path = velociteReverb
 
@@ -52,6 +51,8 @@ class Pad:
 
         else:
             mixer.music.load(self.sound.getPath())
+            
+            print(self.sound.getPath())
         
             volume = round(float(velocite*100/127)/100, 2)
         
