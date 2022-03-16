@@ -40,7 +40,7 @@ class Pad:
     def play(self, velocite, reverb, velociteReverb):
 
         if reverb == True:
-            Path = self.makeReverb(velociteReverb)
+            Path = velociteReverb
 
             mixer.music.load(Path)
 

@@ -74,6 +74,7 @@ class AkaiMPD218(MidiDevice):
     def start(self):
         Loop = False
         reverb = False
+        notreverb = False
         velociteReverb = 0
         Bankloop = []
         padTouchLoop = []
@@ -98,6 +99,7 @@ class AkaiMPD218(MidiDevice):
                     if canal == i:
                         program = self.getProgram(i - 143)
                         if padTouch <= 15:
+                            notreverb = False
                             if program.getBank('A').getPad(padTouch).isLoop == True and program.getBank('A').getPad(padTouch).isReading() == True:
                                 if(len(Bankloop) != 0):
                                     if(Bankloop[0] == 'A' and padTouch == padTouchLoop[0]):
@@ -130,6 +132,7 @@ class AkaiMPD218(MidiDevice):
                                     program.getBank('A').getPad(padTouch).play(velocite, reverb, velociteReverb)
                                     #print(program.getBank('A').getPad(padTouch).channel)
                         elif padTouch > 15 and padTouch <= 31:
+                            notreverb = False
                             if program.getBank('B').getPad(padTouch).isLoop == True and program.getBank('B').getPad(padTouch).isReading() == True:
                                 if(len(Bankloop) != 0):
                                     if(Bankloop[0] == 'B' and padTouch == padTouchLoop[0]):
@@ -159,14 +162,18 @@ class AkaiMPD218(MidiDevice):
                                     padTouchLoop.append(padTouch)
                                     velociteLoop.append(velocite)
                                     programLoop = program
+                                
                                 #print(program.getBank('B').getPad(padTouch).channel)
                         elif padTouch > 31 and padTouch <= 47:
-                                program.getBank('C').getPad(padTouch).play(velocite, reverb, velociteReverb)
+                                reverb = False
+                                program.getBank('C').getPad(padTouch).play(velocite, False, velociteReverb)
                                 #print(program.getBank('C').getPad(padTouch).channel)
                         elif padTouch > 48:
                             if(velocite == 0):
                                 reverb = False
                             else:
-                                reverb = True
-                                velociteReverb = velocite
+                                if(velocite % 40 == 0):
+                                    if notreverb == False:
+                                        reverb = True
+                                        velociteReverb = programLoop.getBank(Bankloop[0]).getPad(padTouchLoop[0]).makeReverb(velocite)
 
