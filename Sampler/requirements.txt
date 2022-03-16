@@ -7,3 +7,6 @@ rtmidi-python
 
 # pygame
 pygame
+
+# pysndfx
+pysndfx
