@@ -17,18 +17,18 @@
 
 ## 2) 
 ### Telechargez raspberry Pi OS sur votre PC (https://www.raspberrypi.com/software/operating-systems/)
-![telechargementOS](telechargementOS.png)
+![telechargementOS](Images/telechargementOS.png)
 ### <span style="color: orange">Installez bien la version Legacy with Desktop </span>pour bien avoir Raspberry Pi OS 10 et pas 11
 <br/>
 
 ## 3) 
 ### Telechargez BalenaEtcher (https://www.balena.io/etcher/)
-![balena](balena.png)
+![balena](Images/balena.png)
 <br/>
 
 ## 4) 
 ### Lancez BalenaEtcher et cliquez sur "Flash from file"
-![balena1](balena1.png)
+![balena1](Images/balena1.png)
 <br/>
 
 ## 5) 
@@ -37,13 +37,13 @@
 
 ## 6) 
 ### Cliquez sur "Select Target" et selectionnez la carte SD
-![balena2](balena2.png)
+![balena2](Images/balena2.png)
 <br/>
 
 ## 7) 
 ### cliquez sur "flash" et attendez (ça peut durer une dizaine de minutes)
 ### <span style="color: orange">Si le flash échoue </span>, votre carte n'est peut être pas vide, formatez la et réessayer
-![balena3](balena3.png)
+![balena3](Images/balena3.png)
 <br/>
 
 ## 8)
@@ -53,7 +53,7 @@
 ## 9)
 ### Branchez votre Rasberry :  le clavier et la souris, le HDMI à l'écran de votre PC fixe, et l'alimentation sur le secteur.
 ### <span style="color: orange">/!\ Si votre écran ne s'allume pas</span>, verifier le port de votre HDMI sur votre PC (IN et pas OUT) et essayez avec l'autre port microHDMI de votre Raspberry
-![Cables](photoCables.jpg)
+![Cables](Images/photoCables.jpg)
 <br/>
 
 ## 10)
@@ -66,18 +66,18 @@
 
 ## 12)
 ### Cliquez sur restart pour redemarrer votre Raspberry après les mises à jour
-![restart](restart.png)
+![restart](Images/restart.png)
 <br/>
 
 ## 13)
 ### <span style="color: red">L'installation de raspberry PI OS est terminée</span> , maintenant, il vous faut recuperer le dossier contenant le logiciel necéssaire à la mise en route de l'AKAI. Pour cela, soit vous l'avez sur votre Drive ou une clé USB, soit il vous faut le récuperer sur notre GitLab commun (https://forge.iut-larochelle.fr)
-![gitlab](gitlab.png)
+![gitlab](Images/gitlab.png)
 <br/>
 
 
 ## 14)
 ### faites un clic droit sur l'icone de son en haut à droite et sélectionnez "AV Jack"
-![Son](sonPanneau.png)
+![Son](Images/sonPanneau.png)
 <br/>
 
 
